@@ -11,10 +11,6 @@ from pprint import pprint
 
 
 class AwsRoute53Utilities:
-    env.user = 'ec2-user'
-    groupnames = list()
-    servers = list()
-    env.roledefs['as_servers'] = list()
     
     
     def basictest(self, m):
@@ -29,8 +25,7 @@ class AwsRoute53Utilities:
 
         zones = boto3client.list_hosted_zones()
 
-        #for k, v in zones.iteritems():
-        #    print(k, v)
+        
         for x in zones["HostedZones"]:
             if x["Name"] == domainname:
                 ## May want to refactor
