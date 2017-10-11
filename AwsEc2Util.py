@@ -108,7 +108,7 @@ class AwsEc2Utilities:
 
          session = boto3.Session(profile_name=profile)
          ec2 = session.client('ec2')
-         print("Testing")
+        
          ## Get All Reservations
          response = ec2.describe_instances()
          ## Get Instances
