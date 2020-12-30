@@ -1,41 +1,21 @@
-
-from fabric.api import run,env, put, get, local, settings
-from os import path
-import time
-from fabric.colors import green as _green, yellow as _yellow
-import boto
-import boto.ec2
-import boto.ec2.autoscale
 import boto3
-from pprint import pprint
-
 
 class AwsAsgUtilities:
-  
     
     def basictest(self, m):
         m = "new message"
         return m
      
-
-    
-
     """Method to get instances attached to an Autoscaling Group"""
     def get_asginstances(self, profile):
    
-
         session = boto3.Session(profile_name=profile)
         asginstances = {}
         client = session.client('autoscaling')
-        
         response = client.describe_auto_scaling_instances()
-
         for i in response["AutoScalingInstances"]:
             print(i["AutoScalingGroupName"], i["InstanceId"])
             asginstances.setdefault(i["AutoScalingGroupName"],[]).append(i["InstanceId"])
-        
-
-
         return asginstances
    
     """Method to delete an ASG with a ForceDelete=True"""
@@ -53,7 +33,6 @@ class AwsAsgUtilities:
         client = session.client('autoscaling')
         response = client.delete_launch_configuration(
         LaunchConfigurationName=lcname,
-      
         )
 
         
